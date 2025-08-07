@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy7qky7givvym"]
+
+[ext_resource type="Texture2D" uid="uid://dkcutdlj3ve6y" path="res://assets/sprites/borda6.png" id="1_r0gpq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hof6d"]
+size = Vector2(126, 90)
+
+[node name="Borda" type="Area2D"]
+
+[node name="StaticBody2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r0gpq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hof6d")

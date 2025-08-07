@@ -108,44 +108,6 @@ diagonalB = NodePath("../DiagonalB")
 wait_time = 3.226
 one_shot = true
 
-[node name="Borda6" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(401, 300)
-scale = Vector2(1.05, 1.05)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda6" type="Sprite2D" parent="Borda6"]
-position = Vector2(-183, 0)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda7" type="Sprite2D" parent="Borda6"]
-position = Vector2(184, 0)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda8" type="Sprite2D" parent="Borda6"]
-position = Vector2(0, 109)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda6" type="Sprite2D" parent="Borda6/Borda8"]
-position = Vector2(-183, 0)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda7" type="Sprite2D" parent="Borda6/Borda8"]
-position = Vector2(184, 0)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda8" type="Sprite2D" parent="Borda6/Borda8"]
-position = Vector2(-1, -217)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda6" type="Sprite2D" parent="Borda6/Borda8/Borda8"]
-position = Vector2(-183, 0)
-texture = ExtResource("6_yenxw")
-
-[node name="Borda7" type="Sprite2D" parent="Borda6/Borda8/Borda8"]
-position = Vector2(184, 0)
-texture = ExtResource("6_yenxw")
-
 [node name="DiagonalA" parent="." groups=["diagonal_a"] instance=ExtResource("7_qjiid")]
 position = Vector2(401, 298)
 
@@ -290,3 +252,48 @@ offset_bottom = 470.0
 bbcode_enabled = true
 text = "STAGE"
 metadata/_edit_use_anchors_ = true
+
+[node name="Borda1" type="Sprite2D" parent="."]
+position = Vector2(207.8, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda2" type="Sprite2D" parent="."]
+position = Vector2(399.95, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda3" type="Sprite2D" parent="."]
+position = Vector2(593.15, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda4" type="Sprite2D" parent="."]
+position = Vector2(208.85, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda5" type="Sprite2D" parent="."]
+position = Vector2(401, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda6" type="Sprite2D" parent="."]
+position = Vector2(594.2, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda7" type="Sprite2D" parent="."]
+position = Vector2(208.85, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda8" type="Sprite2D" parent="."]
+position = Vector2(401, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")
+
+[node name="Borda9" type="Sprite2D" parent="."]
+position = Vector2(594.2, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_yenxw")

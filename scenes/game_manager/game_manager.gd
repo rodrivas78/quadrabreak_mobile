@@ -58,22 +58,37 @@ var firstTime = true
 var counter = 0
 var toggle = false
 var turnOnFadeOut = false
+var last_clicked_index := -1
+var click_count := 0
 
-	
 func _ready():
 	buscar_blocos()
 	ativa_ou_desativa_paddles()
 	manage_show_stage_number_timer()
 	show_stage_number_sprite()
 	show_level_eligibility()
+	#for i in range(1, 3):
+		##var borda_node = get_node("Borda%d" % i)
+		#var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+		#borda_node.input_event.connect(_on_borda_clicked.bind(i))
+	for i in range(1, 10):
+		#var borda_node = get_node_or_null("Borda%d" % i)
+		var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+		if borda_node and borda_node is Area2D:
+			borda_node.input_event.connect(_on_borda_clicked.bind(i))
+		else:
+			print("⚠️ Borda%d não encontrado ou não é Area2D" % i)
 	
 func _process(delta):
 	receber_inputs()
 	
 func receber_inputs() -> void:
-	jump_positions = Vector2i(xPosition[iX], yPosition[iY])
-	diagonalA.position = jump_positions
-	diagonalB.position = jump_positions
+	#TODO - As linhas abaixo funcionam somente para os inputs de teclado
+	#jump_positions = Vector2i(xPosition[iX], yPosition[iY])
+	#diagonalA.position = jump_positions
+	#diagonalB.position = jump_positions
+	#TODO - As linhas ACIMA funcionam somente para os inputs de teclado
+	#print_debug(jump_positions)
 	#if Input.is_action_just_pressed("nextStage"):
 		#print_debug("is_action_just_pressed(nextStage)")
 		#timer_do_passar_de_fase.start()
@@ -242,3 +257,18 @@ func show_level_label():
 	await get_tree().create_timer(2.6).timeout
 	black_overlay.visible = false
 	level_label.visible = false
+	
+
+func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, index: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		var row = (index - 1) / 3
+		var col = (index - 1) % 3
+		var pos = Vector2(xPosition[col], yPosition[row])
+
+		if diagonalA.position == pos or diagonalB.position == pos:
+			diagonalA.visible = !diagonalA.visible
+			diagonalB.visible = !diagonalB.visible
+			ativa_ou_desativa_paddles()
+		else:
+			diagonalA.position = pos
+			diagonalB.position = pos
