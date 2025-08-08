@@ -67,17 +67,12 @@ func _ready():
 	manage_show_stage_number_timer()
 	show_stage_number_sprite()
 	show_level_eligibility()
-	#for i in range(1, 3):
-		##var borda_node = get_node("Borda%d" % i)
-		#var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
-		#borda_node.input_event.connect(_on_borda_clicked.bind(i))
 	for i in range(1, 10):
-		#var borda_node = get_node_or_null("Borda%d" % i)
 		var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
 		if borda_node and borda_node is Area2D:
 			borda_node.input_event.connect(_on_borda_clicked.bind(i))
 		else:
-			print("⚠️ Borda%d não encontrado ou não é Area2D" % i)
+			print("Borda%d não encontrado ou não é Area2D" % i)
 	
 func _process(delta):
 	receber_inputs()

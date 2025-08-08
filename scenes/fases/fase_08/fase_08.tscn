@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bqkn0irt8hy2o"]
+[gd_scene load_steps=28 format=3 uid="uid://bqkn0irt8hy2o"]
 
 [ext_resource type="Texture2D" uid="uid://bgg12yqad5t7l" path="res://assets/sprites/campo-roxo_hud9_2.png" id="1_mpkf3"]
 [ext_resource type="PackedScene" uid="uid://csrr51oa8ywqk" path="res://scenes/paddle/paddle.tscn" id="2_a1sel"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://ug5ick6j4aju" path="res://assets/sprites/_50.png" id="24_vacqs"]
 [ext_resource type="Texture2D" uid="uid://c328yss8joxum" path="res://assets/sprites/no_bonus.png" id="25_m30io"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="26_v2tt0"]
+[ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="27_i5wir"]
 
 [node name="Fase08" type="Node2D"]
 
@@ -266,4 +267,21 @@ offset_right = 956.0
 offset_bottom = 470.0
 bbcode_enabled = true
 text = "STAGE"
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("27_i5wir")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.38381
+anchor_bottom = 0.206667
+offset_left = 196.0
+offset_top = 242.0
+offset_right = 306.0
+offset_bottom = 295.0
+bbcode_enabled = true
+text = "LEVEL"
 metadata/_edit_use_anchors_ = true

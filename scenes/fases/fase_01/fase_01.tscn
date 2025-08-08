@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://chvwhpbfvnlx4"]
+[gd_scene load_steps=34 format=3 uid="uid://chvwhpbfvnlx4"]
 
 [ext_resource type="Texture2D" uid="uid://bgg12yqad5t7l" path="res://assets/sprites/campo-roxo_hud9_2.png" id="1_awebk"]
 [ext_resource type="PackedScene" uid="uid://csrr51oa8ywqk" path="res://scenes/paddle/paddle.tscn" id="2_0h4wr"]
@@ -30,6 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://cb1fy6sda6pwm" path="res://assets/sprites/yes_selector.png" id="28_5hpeb"]
 [ext_resource type="Texture2D" uid="uid://b38nof4i4ur2q" path="res://assets/sprites/no_selector.png" id="29_e58o0"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="30_313at"]
+[ext_resource type="Texture2D" uid="uid://dkcutdlj3ve6y" path="res://assets/sprites/borda6.png" id="31_h3tfu"]
+[ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_12bq4"]
+[ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_icsn2"]
 
 [node name="Fase01" type="Node2D"]
 
@@ -88,7 +91,7 @@ visible = false
 position = Vector2(408, 144)
 
 [node name="DiagonalB" parent="." groups=["diagonal_b"] instance=ExtResource("7_jt1tc")]
-position = Vector2(272, 200)
+position = Vector2(408, 299)
 
 [node name="greenBar" type="Sprite2D" parent="."]
 position = Vector2(925.5, 202.5)
@@ -229,4 +232,102 @@ offset_right = 956.0
 offset_bottom = 470.0
 bbcode_enabled = true
 text = "STAGE"
+metadata/_edit_use_anchors_ = true
+
+[node name="Borda1_" type="Sprite2D" parent="."]
+position = Vector2(207.8, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda2_" type="Sprite2D" parent="."]
+position = Vector2(399.95, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda3_" type="Sprite2D" parent="."]
+position = Vector2(593.15, 186.6)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda4_" type="Sprite2D" parent="."]
+position = Vector2(208.85, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda5_" type="Sprite2D" parent="."]
+position = Vector2(401, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda6_" type="Sprite2D" parent="."]
+position = Vector2(594.2, 300)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda7_" type="Sprite2D" parent="."]
+position = Vector2(208.85, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda8_" type="Sprite2D" parent="."]
+position = Vector2(401, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda9_" type="Sprite2D" parent="."]
+position = Vector2(594.2, 414.45)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("31_h3tfu")
+
+[node name="Borda1" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(207.8, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda2" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(399.95, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda3" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(593.15, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda4" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(208.85, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda5" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(401, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda6" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(594.2, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda7" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(208.85, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda8" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(401, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda9" parent="." instance=ExtResource("32_12bq4")]
+position = Vector2(594.2, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("33_icsn2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.38381
+anchor_bottom = 0.206667
+offset_left = 196.0
+offset_top = 242.0
+offset_right = 306.0
+offset_bottom = 295.0
+bbcode_enabled = true
+text = "LEVEL"
 metadata/_edit_use_anchors_ = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cx8ysk5e0lhk3"]
+[gd_scene load_steps=34 format=3 uid="uid://cx8ysk5e0lhk3"]
 
 [ext_resource type="Texture2D" uid="uid://cuk7lthad6lrt" path="res://assets/sprites/hud_bg_alpha.png" id="1_54d2o"]
 [ext_resource type="Texture2D" uid="uid://krfpoxiee1g4" path="res://assets/sprites/end_screen1.jpg" id="2_3l7qs"]
@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://cb1fy6sda6pwm" path="res://assets/sprites/yes_selector.png" id="29_t034v"]
 [ext_resource type="Texture2D" uid="uid://b38nof4i4ur2q" path="res://assets/sprites/no_selector.png" id="30_bml26"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="31_2syu8"]
+[ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_w77uc"]
+[ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_s7y3i"]
 
 [node name="Fase09" type="Node2D"]
 
@@ -248,47 +250,100 @@ bbcode_enabled = true
 text = "STAGE"
 metadata/_edit_use_anchors_ = true
 
-[node name="Borda1" type="Sprite2D" parent="."]
+[node name="Borda1_" type="Sprite2D" parent="."]
 position = Vector2(207.8, 186.6)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda2" type="Sprite2D" parent="."]
+[node name="Borda2_" type="Sprite2D" parent="."]
 position = Vector2(399.95, 186.6)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda3" type="Sprite2D" parent="."]
+[node name="Borda3_" type="Sprite2D" parent="."]
 position = Vector2(593.15, 186.6)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda4" type="Sprite2D" parent="."]
+[node name="Borda4_" type="Sprite2D" parent="."]
 position = Vector2(208.85, 300)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda5" type="Sprite2D" parent="."]
+[node name="Borda5_" type="Sprite2D" parent="."]
 position = Vector2(401, 300)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda6" type="Sprite2D" parent="."]
+[node name="Borda6_" type="Sprite2D" parent="."]
 position = Vector2(594.2, 300)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda7" type="Sprite2D" parent="."]
+[node name="Borda7_" type="Sprite2D" parent="."]
 position = Vector2(208.85, 414.45)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda8" type="Sprite2D" parent="."]
+[node name="Borda8_" type="Sprite2D" parent="."]
 position = Vector2(401, 414.45)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
 
-[node name="Borda9" type="Sprite2D" parent="."]
+[node name="Borda9_" type="Sprite2D" parent="."]
 position = Vector2(594.2, 414.45)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_thn1o")
+
+[node name="Borda1" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(207.8, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda2" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(399.95, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda3" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(593.15, 186.6)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda4" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(208.85, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda5" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(401, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda6" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(594.2, 300)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda7" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(208.85, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda8" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(401, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="Borda9" parent="." instance=ExtResource("32_w77uc")]
+position = Vector2(594.2, 414.45)
+scale = Vector2(1.05, 1.05)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("33_s7y3i")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.38381
+anchor_bottom = 0.206667
+offset_left = 196.0
+offset_top = 242.0
+offset_right = 306.0
+offset_bottom = 295.0
+bbcode_enabled = true
+text = "LEVEL"
+metadata/_edit_use_anchors_ = true

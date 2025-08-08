@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://babyn4rnn5xve"]
+[gd_scene load_steps=34 format=3 uid="uid://babyn4rnn5xve"]
 
 [ext_resource type="Texture2D" uid="uid://bgg12yqad5t7l" path="res://assets/sprites/campo-roxo_hud9_2.png" id="1_gveqe"]
 [ext_resource type="Texture2D" uid="uid://cwvbtpxwj8kbc" path="res://assets/sprites/bg_verde2.jpg" id="2_m5x26"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://b38nof4i4ur2q" path="res://assets/sprites/no_selector.png" id="30_4sx4c"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="31_4xun1"]
 [ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_gy1ak"]
+[ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_r5ks2"]
 
 [node name="Fase05" type="Node2D"]
 
@@ -304,3 +305,20 @@ scale = Vector2(1.05, 1.05)
 [node name="Borda9" parent="." instance=ExtResource("32_gy1ak")]
 position = Vector2(594.2, 414.45)
 scale = Vector2(1.05, 1.05)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("33_r5ks2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.38381
+anchor_bottom = 0.206667
+offset_left = 196.0
+offset_top = 242.0
+offset_right = 306.0
+offset_bottom = 295.0
+bbcode_enabled = true
+text = "LEVEL"
+metadata/_edit_use_anchors_ = true

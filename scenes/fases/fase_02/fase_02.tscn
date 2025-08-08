@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c3tsnvbmjopsf"]
+[gd_scene load_steps=34 format=3 uid="uid://c3tsnvbmjopsf"]
 
 [ext_resource type="Texture2D" uid="uid://cuk7lthad6lrt" path="res://assets/sprites/hud_bg_alpha.png" id="1_crcji"]
 [ext_resource type="PackedScene" uid="uid://csrr51oa8ywqk" path="res://scenes/paddle/paddle.tscn" id="2_g83dj"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://b38nof4i4ur2q" path="res://assets/sprites/no_selector.png" id="30_s5xjj"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="31_qbxrc"]
 [ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_fgm4e"]
+[ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_aadcv"]
 
 [node name="Fase02" type="Node2D"]
 
@@ -239,7 +240,8 @@ texture = ExtResource("24_m2f82")
 
 [node name="NoBonus" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(925, 423)
+position = Vector2(923.25, 423)
+scale = Vector2(0.981283, 1)
 texture = ExtResource("25_gp12h")
 
 [node name="BkOverlay" type="Sprite2D" parent="."]
@@ -361,3 +363,20 @@ scale = Vector2(1.05, 1.05)
 [node name="Borda9" parent="." instance=ExtResource("32_fgm4e")]
 position = Vector2(594.2, 414.45)
 scale = Vector2(1.05, 1.05)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("33_aadcv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.38381
+anchor_bottom = 0.206667
+offset_left = 196.0
+offset_top = 242.0
+offset_right = 306.0
+offset_bottom = 295.0
+bbcode_enabled = true
+text = "LEVEL"
+metadata/_edit_use_anchors_ = true
