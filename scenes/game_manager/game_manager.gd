@@ -67,6 +67,8 @@ func _ready():
 	manage_show_stage_number_timer()
 	show_stage_number_sprite()
 	show_level_eligibility()
+	yes_selector.connect("input_event", Callable(self, "_on_yes_selector_input_event"))
+	no_selector.connect("input_event", Callable(self, "_on_no_selector_input_event"))
 	for i in range(1, 10):
 		var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
 		if borda_node and borda_node is Area2D:
@@ -125,21 +127,22 @@ func receber_inputs() -> void:
 		continue_yn.visible = true
 		if (firstTime):
 			yes_selector.visible = true
-		if Input.is_action_just_pressed("shift-paddle"):
-			match counter:
-				0:  #continue
-					selected.play()
-					ball.turnOnFadeOut = true
-					await get_tree().create_timer(2.0).timeout
-					GlobalData.reset_lives()
-					ScoreManager.reset_player_score()
-					GlobalData.toggle_shouldIncreaseLevel(false)
-					get_tree().reload_current_scene()
-				1:  #nao continue 
-					selected.play()
-					ball.turnOnFadeOut = true
-					await get_tree().create_timer(1.0).timeout
-					get_tree().change_scene_to_file(title_screen)
+			no_selector.visible = true
+		#if Input.is_action_just_pressed("shift-paddle"):
+			#match counter:
+				#0:  #continue
+					#selected.play()
+					#ball.turnOnFadeOut = true
+					#await get_tree().create_timer(2.0).timeout
+					#GlobalData.reset_lives()
+					#ScoreManager.reset_player_score()
+					#GlobalData.toggle_shouldIncreaseLevel(false)
+					#get_tree().reload_current_scene()
+				#1:  #nao continue 
+					#selected.play()
+					#ball.turnOnFadeOut = true
+					#await get_tree().create_timer(1.0).timeout
+					#get_tree().change_scene_to_file(title_screen)
 		if Input.is_action_just_pressed("mv-direito"):
 			toggle = true
 			change_selector(toggle)
@@ -267,3 +270,33 @@ func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, in
 		else:
 			diagonalA.position = pos
 			diagonalB.position = pos
+
+func _on_yes_selector_input_event(viewport, event, shape_idx):
+	toggle = false
+	change_selector(toggle)
+	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#toggle = false
+		#change_selector(toggle)
+		confirmar_selecao()
+
+func _on_no_selector_input_event(viewport, event, shape_idx):
+	toggle = true
+	change_selector(toggle)
+	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		confirmar_selecao()
+		
+func confirmar_selecao():
+	match counter:
+		0:  # Continue
+			selected.play()
+			ball.turnOnFadeOut = true
+			await get_tree().create_timer(2.0).timeout
+			GlobalData.reset_lives()
+			ScoreManager.reset_player_score()
+			GlobalData.toggle_shouldIncreaseLevel(false)
+			get_tree().reload_current_scene()
+		1:  # Não Continue
+			selected.play()
+			ball.turnOnFadeOut = true
+			await get_tree().create_timer(1.0).timeout
+			get_tree().change_scene_to_file(title_screen)
