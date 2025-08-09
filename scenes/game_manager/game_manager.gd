@@ -28,6 +28,8 @@ var blocos_na_fase : int = 0
 @onready var continue_yn = get_node("/root/"+current_scene_name+"/ContinueYN")
 @onready var yes_selector = get_node("/root/"+current_scene_name+"/YesSelector")
 @onready var no_selector = get_node("/root/"+current_scene_name+"/NoSelector")
+@onready var yes_selector_sprite = get_node("/root/"+current_scene_name+"/YesSelector/YesSelector_")
+@onready var no_selector_sprite = get_node("/root/"+current_scene_name+"/NoSelector/NoSelector_")
 
 var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
 
@@ -38,7 +40,7 @@ var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
 @export var verdePeq : Node2D
 var iX : int = 1
 var iY : int = 1 
-@export var yPosition = [184, 298, 412]
+@export var yPosition = [185, 298, 413]
 @export var xPosition = [211, 401, 595]
 @export var jump_positions = Vector2i(xPosition[iX], yPosition[iY])
 var current_jump_index = 0
@@ -128,7 +130,21 @@ func receber_inputs() -> void:
 		if (firstTime):
 			yes_selector.visible = true
 			no_selector.visible = true
-		#if Input.is_action_just_pressed("shift-paddle"):
+			#for i in range(1, 10):
+				#var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+				#var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i+"_")
+				#borda_node.visible = !borda_node.visible
+				#borda_node_.visible = !borda_node_.visible
+			for i in range(1, 10):
+				var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+				var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i)
+				#var borda_node  = get_node("/root/%s/Borda%d" % [current_scene_name, i])
+				#var borda_node_ = get_node("/root/%s/Borda%d_" % [current_scene_name, i])
+				if borda_node.visible:
+					borda_node.visible  = !borda_node.visible
+					borda_node_.visible = !borda_node_.visible
+
+			#if Input.is_action_just_pressed("shift-paddle"):
 			#match counter:
 				#0:  #continue
 					#selected.play()
@@ -272,16 +288,20 @@ func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, in
 			diagonalB.position = pos
 
 func _on_yes_selector_input_event(viewport, event, shape_idx):
-	toggle = false
-	change_selector(toggle)
+	#toggle = false
+	#hange_selector(toggle)
+	yes_selector_sprite.visible = true
+	no_selector_sprite.visible = false
 	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		#toggle = false
 		#change_selector(toggle)
 		confirmar_selecao()
 
 func _on_no_selector_input_event(viewport, event, shape_idx):
-	toggle = true
-	change_selector(toggle)
+	#toggle = true
+	#change_selector(toggle)
+	yes_selector_sprite.visible = false
+	no_selector_sprite.visible = true
 	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		confirmar_selecao()
 		

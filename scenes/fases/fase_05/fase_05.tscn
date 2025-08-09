@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://babyn4rnn5xve"]
+[gd_scene load_steps=35 format=3 uid="uid://babyn4rnn5xve"]
 
 [ext_resource type="Texture2D" uid="uid://bgg12yqad5t7l" path="res://assets/sprites/campo-roxo_hud9_2.png" id="1_gveqe"]
 [ext_resource type="Texture2D" uid="uid://cwvbtpxwj8kbc" path="res://assets/sprites/bg_verde2.jpg" id="2_m5x26"]
@@ -33,6 +33,9 @@
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="31_4xun1"]
 [ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_gy1ak"]
 [ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_r5ks2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1x1x"]
+size = Vector2(245, 66)
 
 [node name="Fase05" type="Node2D"]
 
@@ -199,13 +202,13 @@ position = Vector2(399.941, 301)
 scale = Vector2(0.7, 0.697)
 texture = ExtResource("28_wx4yh")
 
-[node name="YesSelector" type="Sprite2D" parent="."]
+[node name="YesSelector_" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(270.941, 377)
 scale = Vector2(0.7, 0.697)
 texture = ExtResource("29_lu8wo")
 
-[node name="NoSelector" type="Sprite2D" parent="."]
+[node name="NoSelector_" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(526.941, 376)
 scale = Vector2(0.7, 0.697)
@@ -322,3 +325,27 @@ offset_bottom = 295.0
 bbcode_enabled = true
 text = "LEVEL"
 metadata/_edit_use_anchors_ = true
+
+[node name="YesSelector" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YesSelector"]
+position = Vector2(270, 377)
+shape = SubResource("RectangleShape2D_t1x1x")
+
+[node name="YesSelector_" type="Sprite2D" parent="YesSelector"]
+position = Vector2(270.941, 377)
+scale = Vector2(0.7, 0.697)
+texture = ExtResource("29_lu8wo")
+
+[node name="NoSelector" type="Area2D" parent="."]
+visible = false
+
+[node name="NoSelector_" type="Sprite2D" parent="NoSelector"]
+position = Vector2(526.941, 376)
+scale = Vector2(0.7, 0.697)
+texture = ExtResource("30_4sx4c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoSelector"]
+position = Vector2(527.5, 377)
+shape = SubResource("RectangleShape2D_t1x1x")
