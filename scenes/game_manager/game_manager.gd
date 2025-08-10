@@ -136,16 +136,9 @@ func receber_inputs() -> void:
 		if (firstTime):
 			yes_selector.visible = true
 			no_selector.visible = true
-			#for i in range(1, 10):
-				#var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
-				#var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i+"_")
-				#borda_node.visible = !borda_node.visible
-				#borda_node_.visible = !borda_node_.visible
 			for i in range(1, 10):
 				var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
 				var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i)
-				#var borda_node  = get_node("/root/%s/Borda%d" % [current_scene_name, i])
-				#var borda_node_ = get_node("/root/%s/Borda%d_" % [current_scene_name, i])
 				if borda_node.visible:
 					borda_node.visible  = !borda_node.visible
 					borda_node_.visible = !borda_node_.visible
@@ -262,7 +255,7 @@ func manage_show_stage_number_timer():
 	
 func show_stage_number_sprite():
 	score_label.visible = true
-	timer_node.start(3.0)
+	timer_node.start(2.0)
 
 func _on_timer_timeout():
 	score_label.visible = false
@@ -306,22 +299,16 @@ func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, in
 			diagonalB.position = pos
 
 func _on_yes_selector_input_event(viewport, event, shape_idx):
-	#toggle = false
-	#hange_selector(toggle)
 	yes_selector_sprite.visible = true
 	no_selector_sprite.visible = false
 	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		#toggle = false
-		#change_selector(toggle)
-		confirmar_selecao()
+		confirmar_selecao(0)
 
 func _on_no_selector_input_event(viewport, event, shape_idx):
-	#toggle = true
-	#change_selector(toggle)
 	yes_selector_sprite.visible = false
 	no_selector_sprite.visible = true
 	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		confirmar_selecao()
+		confirmar_selecao(1)
 		
 func _on_start_button_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -329,9 +316,10 @@ func _on_start_button_input_event(viewport, event, shape_idx):
 		#ball.primeiro_lancamento = false
 		start_button.visible = false
 			
-func confirmar_selecao():
+func confirmar_selecao(counter):
 	match counter:
 		0:  # Continue
+			print_debug(counter)
 			selected.play()
 			ball.turnOnFadeOut = true
 			await get_tree().create_timer(2.0).timeout
@@ -340,8 +328,14 @@ func confirmar_selecao():
 			GlobalData.toggle_shouldIncreaseLevel(false)
 			get_tree().reload_current_scene()
 		1:  # Não Continue
+			print_debug(counter)
 			selected.play()
 			ball.turnOnFadeOut = true
 			await get_tree().create_timer(1.0).timeout
+			#abaio codigo (4 linhas) exclusivo para mobile onde há o retorno para a fase 1
+			GlobalData.reset_lives()
+			ScoreManager.reset_player_score()
+			GlobalData.reset_level()
+			GlobalData.reset_stageCounter()
 			#get_tree().change_scene_to_file(title_screen)
 			get_tree().change_scene_to_file(stage_one)
