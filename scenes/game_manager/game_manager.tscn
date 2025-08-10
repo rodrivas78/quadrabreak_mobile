@@ -21,15 +21,15 @@ volume_db = -13.818
 
 [node name="SomLevelCompleted" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_a2lxk")
-volume_db = -13.818
+volume_db = -10.281
 
 [node name="SomPerfect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_248d3")
-volume_db = -9.573
+volume_db = -8.866
 
 [node name="SomGameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_x0eid")
-volume_db = 3.126
+volume_db = 2.419
 
 [node name="SomSelector" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_cdxtn")

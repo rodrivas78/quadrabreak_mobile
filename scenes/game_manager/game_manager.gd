@@ -319,7 +319,6 @@ func _on_start_button_input_event(viewport, event, shape_idx):
 func confirmar_selecao(counter):
 	match counter:
 		0:  # Continue
-			print_debug(counter)
 			selected.play()
 			ball.turnOnFadeOut = true
 			await get_tree().create_timer(2.0).timeout
@@ -328,11 +327,10 @@ func confirmar_selecao(counter):
 			GlobalData.toggle_shouldIncreaseLevel(false)
 			get_tree().reload_current_scene()
 		1:  # Não Continue
-			print_debug(counter)
 			selected.play()
 			ball.turnOnFadeOut = true
 			await get_tree().create_timer(1.0).timeout
-			#abaio codigo (4 linhas) exclusivo para mobile onde há o retorno para a fase 1
+			#abaixo codigo (4 linhas) exclusivo para mobile onde há o retorno para a fase 1
 			GlobalData.reset_lives()
 			ScoreManager.reset_player_score()
 			GlobalData.reset_level()

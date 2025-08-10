@@ -199,26 +199,28 @@ func update_level():
 		#print_debug("LEVEL: ", GlobalData.level)	
 	match GlobalData.level:
 		1:
-			velocidade_da_bola = 400.0
+			velocidade_da_bola = 300.0
 		2:
-			velocidade_da_bola = 500.0
+			velocidade_da_bola = 400.0
 		3:
-			velocidade_da_bola = 600.0
+			velocidade_da_bola = 500.0
 		4:
-			velocidade_da_bola = 700.0
+			velocidade_da_bola = 600.0
 		5:
-			velocidade_da_bola = 800.0
+			velocidade_da_bola = 700.0
 		6:
-			velocidade_da_bola = 900.0
+			velocidade_da_bola = 800.0
 		7:
-			velocidade_da_bola = 1000.0
+			velocidade_da_bola = 900.0
 		8: 
-			velocidade_da_bola = 1100.0
+			velocidade_da_bola = 1000.0
 		9: 
-			velocidade_da_bola = 1200.0	
+			velocidade_da_bola = 1100.0	
 		10:
+			velocidade_da_bola = 1200.0
+		11:
 			velocidade_da_bola = 1300.0
-	if (GlobalData.level > 10):
+	if (GlobalData.level > 11):
 		velocidade_da_bola = 1400.0
 	#print_debug("velocidade_bola: ", velocidade_da_bola)
 
