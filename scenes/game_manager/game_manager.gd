@@ -28,9 +28,13 @@ var blocos_na_fase : int = 0
 @onready var continue_yn = get_node("/root/"+current_scene_name+"/ContinueYN")
 @onready var yes_selector = get_node("/root/"+current_scene_name+"/YesSelector")
 @onready var no_selector = get_node("/root/"+current_scene_name+"/NoSelector")
+@onready var yes_selector_sprite = get_node("/root/"+current_scene_name+"/YesSelector/YesSelector_")
+@onready var no_selector_sprite = get_node("/root/"+current_scene_name+"/NoSelector/NoSelector_")
+@onready var start_button = get_node("/root/"+current_scene_name+"/StartButton")
 
-var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
-
+#var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
+#Para versão do jogo com sem tela título
+var stage_one : String = "res://scenes/fases/fase_03/fase_03.tscn"
 #Controle dos bumpers
 @export_group("Controle dos Bumpers")
 @export var diagonalA : Node2D
@@ -38,7 +42,7 @@ var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
 @export var verdePeq : Node2D
 var iX : int = 1
 var iY : int = 1 
-@export var yPosition = [184, 298, 412]
+@export var yPosition = [185, 298, 413]
 @export var xPosition = [211, 401, 595]
 @export var jump_positions = Vector2i(xPosition[iX], yPosition[iY])
 var current_jump_index = 0
@@ -67,17 +71,15 @@ func _ready():
 	manage_show_stage_number_timer()
 	show_stage_number_sprite()
 	show_level_eligibility()
-	#for i in range(1, 3):
-		##var borda_node = get_node("Borda%d" % i)
-		#var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
-		#borda_node.input_event.connect(_on_borda_clicked.bind(i))
+	yes_selector.connect("input_event", Callable(self, "_on_yes_selector_input_event"))
+	no_selector.connect("input_event", Callable(self, "_on_no_selector_input_event"))
+	start_button.connect("input_event", Callable(self, "_on_start_button_input_event"))
 	for i in range(1, 10):
-		#var borda_node = get_node_or_null("Borda%d" % i)
 		var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
 		if borda_node and borda_node is Area2D:
 			borda_node.input_event.connect(_on_borda_clicked.bind(i))
 		else:
-			print("⚠️ Borda%d não encontrado ou não é Area2D" % i)
+			print("Borda%d não encontrado ou não é Area2D" % i)
 	
 func _process(delta):
 	receber_inputs()
@@ -98,7 +100,9 @@ func receber_inputs() -> void:
 		#get_tree().reload_current_scene()
 	# Sai do jogo
 	if Input.is_action_just_pressed("sair"):
-		get_tree().change_scene_to_file(title_screen)
+		#get_tree().change_scene_to_file(title_screen)
+		get_tree().change_scene_to_file(stage_one)
+
 	#alterna rebatedores
 	# Verifique se a tecla "espaço" foi pressionada
 	if Input.is_action_just_pressed("shift-paddle"):
@@ -128,23 +132,32 @@ func receber_inputs() -> void:
 		diagonalB.visible = false
 		black_overlay.visible = true
 		continue_yn.visible = true
+		start_button.visible = false
 		if (firstTime):
 			yes_selector.visible = true
-		if Input.is_action_just_pressed("shift-paddle"):
-			match counter:
-				0:  #continue
-					selected.play()
-					ball.turnOnFadeOut = true
-					await get_tree().create_timer(2.0).timeout
-					GlobalData.reset_lives()
-					ScoreManager.reset_player_score()
-					GlobalData.toggle_shouldIncreaseLevel(false)
-					get_tree().reload_current_scene()
-				1:  #nao continue 
-					selected.play()
-					ball.turnOnFadeOut = true
-					await get_tree().create_timer(1.0).timeout
-					get_tree().change_scene_to_file(title_screen)
+			no_selector.visible = true
+			for i in range(1, 10):
+				var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+				var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i)
+				if borda_node.visible:
+					borda_node.visible  = !borda_node.visible
+					borda_node_.visible = !borda_node_.visible
+
+			#if Input.is_action_just_pressed("shift-paddle"):
+			#match counter:
+				#0:  #continue
+					#selected.play()
+					#ball.turnOnFadeOut = true
+					#await get_tree().create_timer(2.0).timeout
+					#GlobalData.reset_lives()
+					#ScoreManager.reset_player_score()
+					#GlobalData.toggle_shouldIncreaseLevel(false)
+					#get_tree().reload_current_scene()
+				#1:  #nao continue 
+					#selected.play()
+					#ball.turnOnFadeOut = true
+					#await get_tree().create_timer(1.0).timeout
+					#get_tree().change_scene_to_file(title_screen)
 		if Input.is_action_just_pressed("mv-direito"):
 			toggle = true
 			change_selector(toggle)
@@ -242,10 +255,11 @@ func manage_show_stage_number_timer():
 	
 func show_stage_number_sprite():
 	score_label.visible = true
-	timer_node.start(3.0)
+	timer_node.start(2.0)
 
 func _on_timer_timeout():
 	score_label.visible = false
+	start_button.visible = true
 
 func show_level_eligibility():
 	if (current_scene_name == "Fase10" || current_scene_name == "Fase03"):
@@ -254,9 +268,20 @@ func show_level_eligibility():
 func show_level_label():
 	black_overlay.visible = true
 	level_label.visible = true
+	for i in range(1, 10):
+				var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+				var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i)
+				if borda_node.visible:
+					borda_node.visible  = !borda_node.visible
+					borda_node_.visible = !borda_node_.visible
 	await get_tree().create_timer(2.6).timeout
 	black_overlay.visible = false
 	level_label.visible = false
+	for i in range(1, 10):
+			var borda_node = get_node("/root/"+current_scene_name+"/Borda%d" % i)
+			var borda_node_ = get_node("/root/"+current_scene_name+"/Borda%d_" % i)
+			borda_node.visible  = !borda_node.visible
+			borda_node_.visible = !borda_node_.visible
 	
 
 func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, index: int) -> void:
@@ -272,3 +297,43 @@ func _on_borda_clicked(viewport: Viewport, event: InputEvent, shape_idx: int, in
 		else:
 			diagonalA.position = pos
 			diagonalB.position = pos
+
+func _on_yes_selector_input_event(viewport, event, shape_idx):
+	yes_selector_sprite.visible = true
+	no_selector_sprite.visible = false
+	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		confirmar_selecao(0)
+
+func _on_no_selector_input_event(viewport, event, shape_idx):
+	yes_selector_sprite.visible = false
+	no_selector_sprite.visible = true
+	if gameOver and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		confirmar_selecao(1)
+		
+func _on_start_button_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		ball.escolher_direcao_inicial()
+		#ball.primeiro_lancamento = false
+		start_button.visible = false
+			
+func confirmar_selecao(counter):
+	match counter:
+		0:  # Continue
+			selected.play()
+			ball.turnOnFadeOut = true
+			await get_tree().create_timer(2.0).timeout
+			GlobalData.reset_lives()
+			ScoreManager.reset_player_score()
+			GlobalData.toggle_shouldIncreaseLevel(false)
+			get_tree().reload_current_scene()
+		1:  # Não Continue
+			selected.play()
+			ball.turnOnFadeOut = true
+			await get_tree().create_timer(1.0).timeout
+			#abaixo codigo (4 linhas) exclusivo para mobile onde há o retorno para a fase 1
+			GlobalData.reset_lives()
+			ScoreManager.reset_player_score()
+			GlobalData.reset_level()
+			GlobalData.reset_stageCounter()
+			#get_tree().change_scene_to_file(title_screen)
+			get_tree().change_scene_to_file(stage_one)

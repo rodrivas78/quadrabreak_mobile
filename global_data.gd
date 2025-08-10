@@ -2,7 +2,7 @@ extends Node
 
 
 var lives = 3
-var level = 0
+var level = 1
 var stageCounter = 1
 var shouldIncreaseLevel = true
 
