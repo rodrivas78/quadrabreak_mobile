@@ -50,7 +50,7 @@ func _ready():
 	update_lives_monitor()
 	update_level()
 	# Conecta o sinal de clique
-	connect("input_event", Callable(self, "_on_bola_input_event"))
+	#connect("input_event", Callable(self, "_on_bola_input_event"))
 	
 func _process(delta):
 	# Se for o primeiro lançamento, esperar a ação do Jogador para lançar
@@ -64,10 +64,10 @@ func _process(delta):
 	set_music_fade_out()
 	
 	
-func _on_bola_input_event(viewport, event, shape_idx):
-	if primeiro_lancamento and event is InputEventMouseButton and event.pressed:
-		escolher_direcao_inicial()
-		primeiro_lancamento = false
+#func _on_bola_input_event(viewport, event, shape_idx):
+	#if primeiro_lancamento and event is InputEventMouseButton and event.pressed:
+		#escolher_direcao_inicial()
+		#primeiro_lancamento = false
 
 func resetar_bola() -> void:
 	# Posiciona a Bola acima do Paddle

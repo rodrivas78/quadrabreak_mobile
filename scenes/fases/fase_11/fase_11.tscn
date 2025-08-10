@@ -327,9 +327,11 @@ position = Vector2(594.2, 414.45)
 scale = Vector2(1.05, 1.05)
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("33_j7gl8")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+visible = false
 anchors_preset = -1
 anchor_right = 0.38381
 anchor_bottom = 0.206667
