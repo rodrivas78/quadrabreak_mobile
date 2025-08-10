@@ -52,7 +52,6 @@ func _ready():
 	# Conecta o sinal de clique
 	connect("input_event", Callable(self, "_on_bola_input_event"))
 	
-	
 func _process(delta):
 	# Se for o primeiro lançamento, esperar a ação do Jogador para lançar
 	if primeiro_lancamento:
@@ -69,8 +68,7 @@ func _on_bola_input_event(viewport, event, shape_idx):
 	if primeiro_lancamento and event is InputEventMouseButton and event.pressed:
 		escolher_direcao_inicial()
 		primeiro_lancamento = false
-		
-	
+
 func resetar_bola() -> void:
 	# Posiciona a Bola acima do Paddle
 	if GlobalData.lives <= 0:
@@ -142,6 +140,8 @@ func sair_da_tela() -> void:
 	barra_verde.visible = true
 	barra_vermelha.visible = false
 	barra_amarela.visible = false
+	if ball.visible:
+		game_manager.start_button.visible = true
 
 
 func _on_body_entered(body):
