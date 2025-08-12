@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="QuadraBreak"
-run/main_scene="res://scenes/fases/fase_03/fase_03.tscn"
+run/main_scene="res://scenes/title_screen/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://qb_icon.svg"
 
@@ -90,3 +90,4 @@ nextStage={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

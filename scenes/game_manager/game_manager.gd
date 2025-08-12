@@ -32,9 +32,9 @@ var blocos_na_fase : int = 0
 @onready var no_selector_sprite = get_node("/root/"+current_scene_name+"/NoSelector/NoSelector_")
 @onready var start_button = get_node("/root/"+current_scene_name+"/StartButton")
 
-#var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
+var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
 #Para versão do jogo com sem tela título
-var stage_one : String = "res://scenes/fases/fase_03/fase_03.tscn"
+#var stage_one : String = "res://scenes/fases/fase_03/fase_03.tscn"
 #Controle dos bumpers
 @export_group("Controle dos Bumpers")
 @export var diagonalA : Node2D
@@ -100,8 +100,8 @@ func receber_inputs() -> void:
 		#get_tree().reload_current_scene()
 	# Sai do jogo
 	if Input.is_action_just_pressed("sair"):
-		#get_tree().change_scene_to_file(title_screen)
-		get_tree().change_scene_to_file(stage_one)
+		get_tree().change_scene_to_file(title_screen)
+		#get_tree().change_scene_to_file(stage_one)
 
 	#alterna rebatedores
 	# Verifique se a tecla "espaço" foi pressionada
@@ -335,5 +335,5 @@ func confirmar_selecao(counter):
 			ScoreManager.reset_player_score()
 			GlobalData.reset_level()
 			GlobalData.reset_stageCounter()
-			#get_tree().change_scene_to_file(title_screen)
-			get_tree().change_scene_to_file(stage_one)
+			get_tree().change_scene_to_file(title_screen)
+			#get_tree().change_scene_to_file(stage_one)

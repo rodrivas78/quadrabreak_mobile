@@ -1,22 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd4iqkqvqr738"]
+[gd_scene load_steps=14 format=3 uid="uid://bd4iqkqvqr738"]
 
 [ext_resource type="Script" path="res://scenes/title_screen/TitleScreen.gd" id="1_of714"]
-[ext_resource type="Texture2D" uid="uid://ml8xltcfhh64" path="res://assets/sprites/new_title_screen.jpg" id="2_0ga70"]
+[ext_resource type="Texture2D" uid="uid://dytifpl0oc1lw" path="res://assets/sprites/new_title_screen_mobile.jpg" id="2_o0mmv"]
 [ext_resource type="Texture2D" uid="uid://boiqxnbor50jq" path="res://assets/sprites/new_green_selector.png" id="3_uvhg7"]
 [ext_resource type="Texture2D" uid="uid://tktp8a4nqsp6" path="res://assets/sprites/Controls.jpg" id="3_x3k2d"]
-[ext_resource type="Texture2D" uid="uid://kwxbpilsl3sp" path="res://assets/sprites/Instructions.jpg" id="4_qn3y7"]
+[ext_resource type="Texture2D" uid="uid://debmo36gysxo7" path="res://assets/sprites/Instructions_mobile.jpg" id="4_bvbvi"]
 [ext_resource type="Texture2D" uid="uid://dkp06arfwn2jx" path="res://assets/sprites/new_pink_selector.png" id="4_rb8m5"]
-[ext_resource type="Texture2D" uid="uid://cjuliu1h6ihxo" path="res://assets/sprites/About.jpg" id="5_eroqi"]
+[ext_resource type="Texture2D" uid="uid://ba45wf4s3d83c" path="res://assets/sprites/About_mobile.jpg" id="5_aparn"]
 [ext_resource type="AudioStream" uid="uid://dkoulg0dnla5b" path="res://assets/sons/title_music.wav" id="5_q0ro4"]
 [ext_resource type="AudioStream" uid="uid://dhoamcs2myc4j" path="res://assets/sons/click3.wav" id="6_1i7r7"]
 [ext_resource type="AudioStream" uid="uid://bilfd8l1gjt8p" path="res://assets/sons/choosed_item.wav" id="7_oi1ny"]
+[ext_resource type="Texture2D" uid="uid://bnkuv3xohjeo0" path="res://assets/sprites/back_arrow.png" id="11_ai6th"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k8vt"]
+size = Vector2(267, 79)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7y0p"]
+radius = 26.1725
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_of714")
 
 [node name="ImagemDeFundo" type="Sprite2D" parent="."]
 position = Vector2(525.5, 300)
-texture = ExtResource("2_0ga70")
+texture = ExtResource("2_o0mmv")
 
 [node name="Controls_Scr" type="Sprite2D" parent="."]
 visible = false
@@ -28,40 +35,58 @@ texture = ExtResource("3_x3k2d")
 visible = false
 position = Vector2(525.5, 299)
 scale = Vector2(0.999047, 1)
-texture = ExtResource("4_qn3y7")
+texture = ExtResource("4_bvbvi")
 
 [node name="About_Scr" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(525.5, 299)
 scale = Vector2(0.999047, 1)
-texture = ExtResource("5_eroqi")
+texture = ExtResource("5_aparn")
 
-[node name="selector" type="Sprite2D" parent="."]
+[node name="selector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="selector"]
+position = Vector2(850, 83)
+shape = SubResource("RectangleShape2D_1k8vt")
+
+[node name="selector_" type="Sprite2D" parent="selector"]
 position = Vector2(847.5, 82)
 scale = Vector2(0.999047, 1)
 texture = ExtResource("3_uvhg7")
 
-[node name="selector2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(849.5, 183)
+[node name="selector2" type="Area2D" parent="."]
+position = Vector2(0, 112)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="selector2"]
+position = Vector2(852.5, 109)
+shape = SubResource("RectangleShape2D_1k8vt")
+
+[node name="selector2_" type="Sprite2D" parent="selector2"]
+position = Vector2(849.5, 108)
 scale = Vector2(0.999047, 1)
 texture = ExtResource("4_rb8m5")
 
-[node name="selector3" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(849.5, 290)
+[node name="selector3" type="Area2D" parent="."]
+position = Vector2(0, 264)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="selector3"]
+position = Vector2(851, 108.5)
+shape = SubResource("RectangleShape2D_1k8vt")
+
+[node name="selector2_" type="Sprite2D" parent="selector3"]
+position = Vector2(849.5, 108)
 scale = Vector2(0.999047, 1)
 texture = ExtResource("4_rb8m5")
 
-[node name="selector4" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(849.5, 401)
-scale = Vector2(0.999047, 1)
-texture = ExtResource("4_rb8m5")
+[node name="selector4" type="Area2D" parent="."]
+position = Vector2(0, 404)
 
-[node name="selector5" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(849.5, 513)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="selector4"]
+position = Vector2(850, 108)
+shape = SubResource("RectangleShape2D_1k8vt")
+
+[node name="selector2_" type="Sprite2D" parent="selector4"]
+position = Vector2(849.5, 108)
 scale = Vector2(0.999047, 1)
 texture = ExtResource("4_rb8m5")
 
@@ -82,7 +107,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SomTitleScreen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_q0ro4")
-volume_db = -2.182
+volume_db = -3.182
 autoplay = true
 
 [node name="SomSelector" type="AudioStreamPlayer" parent="."]
@@ -92,3 +117,15 @@ volume_db = -10.909
 [node name="SomChoosed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_oi1ny")
 volume_db = -10.182
+
+[node name="BackArrow" type="Area2D" parent="."]
+visible = false
+position = Vector2(2, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackArrow"]
+position = Vector2(48, 40)
+shape = SubResource("CircleShape2D_c7y0p")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackArrow"]
+position = Vector2(48, 40)
+texture = ExtResource("11_ai6th")
