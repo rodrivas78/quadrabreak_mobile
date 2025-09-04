@@ -1,2 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
+# Ignorar builds Android
+/android/build/
+/android/plugins/
+/android/.gradle/
+/android/.idea/
+/android/.cxx/
+/android/local.properties
+
+# Cache do Godot
+.import/
+.export/
+
+# Plugins gerados/baixados (se quiser manter limpo)
+addons/godot-git-plugin/

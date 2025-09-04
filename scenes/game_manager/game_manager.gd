@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Controle dos Blocos
 @export_group("Controle dos Blocos")
 @export var blocos : Node2D
@@ -11,7 +10,15 @@ var blocos_na_fase : int = 0
 @export var proxima_fase : String
 @onready var timer_do_passar_de_fase : Timer = $TimerDoPassarDeFase
 
+#Admob
+##### Reward #######
+const unit_id_rewarded = "ca-app-pub-3940256099942544/5224354917" # Test Rewarded ID
+var rewarded_ad : RewardedAd
+var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
+var rewarded_ad_callback := OnUserEarnedRewardListener.new()
+
 @onready var current_scene_name = get_tree().current_scene.name
+#@onready var admob = get_node("/root/"+current_scene_name+"/Admob")
 @onready var score_label = get_node("/root/"+current_scene_name+"/CanvasLayer2")
 @onready var barra_verde = get_node("/root/"+current_scene_name+"/greenBar")
 @onready var barra_amarela = get_node("/root/"+current_scene_name+"/yellowBar")
@@ -33,7 +40,7 @@ var blocos_na_fase : int = 0
 @onready var start_button = get_node("/root/"+current_scene_name+"/StartButton")
 
 var title_screen : String = "res://scenes/title_screen/TitleScreen.tscn"
-#Para versão do jogo com sem tela título
+#Para versão do jogo sem tela título
 #var stage_one : String = "res://scenes/fases/fase_03/fase_03.tscn"
 #Controle dos bumpers
 @export_group("Controle dos Bumpers")
@@ -46,6 +53,9 @@ var iY : int = 1
 @export var xPosition = [211, 401, 595]
 @export var jump_positions = Vector2i(xPosition[iX], yPosition[iY])
 var current_jump_index = 0
+
+#variavel de controle do admob
+var is_initialized: bool = false
 
 @onready var select : AudioStreamPlayer = $SomSelector
 @onready var selected : AudioStreamPlayer = $SomChoosed
@@ -66,6 +76,8 @@ var last_clicked_index := -1
 var click_count := 0
 
 func _ready():
+	#admob
+	#admob.initialize()
 	buscar_blocos()
 	ativa_ou_desativa_paddles()
 	manage_show_stage_number_timer()
@@ -80,6 +92,11 @@ func _ready():
 			borda_node.input_event.connect(_on_borda_clicked.bind(i))
 		else:
 			print("Borda%d não encontrado ou não é Area2D" % i)
+	#Admob Reward
+	rewarded_ad_load_callback.on_ad_failed_to_load = on_rewarded_failed_to_load
+	rewarded_ad_load_callback.on_ad_loaded = on_rewarded_loaded
+	rewarded_ad_callback.on_user_earned_reward = on_user_earned_reward
+	load_rewarded_ad()
 	
 func _process(delta):
 	receber_inputs()
@@ -313,14 +330,15 @@ func _on_no_selector_input_event(viewport, event, shape_idx):
 func _on_start_button_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		ball.escolher_direcao_inicial()
-		#ball.primeiro_lancamento = false
 		start_button.visible = false
 			
 func confirmar_selecao(counter):
 	match counter:
 		0:  # Continue
+			print_debug("confirmar_selecao")
 			selected.play()
 			ball.turnOnFadeOut = true
+			show_rewarded_ad()
 			await get_tree().create_timer(2.0).timeout
 			GlobalData.reset_lives()
 			ScoreManager.reset_player_score()
@@ -337,3 +355,25 @@ func confirmar_selecao(counter):
 			GlobalData.reset_stageCounter()
 			get_tree().change_scene_to_file(title_screen)
 			#get_tree().change_scene_to_file(stage_one)
+
+#### Métodos para o anuncio recompensa (rewarded)
+func load_rewarded_ad():
+	RewardedAdLoader.new().load(unit_id_rewarded, AdRequest.new(), rewarded_ad_load_callback)
+
+func on_rewarded_failed_to_load(ad_error : LoadAdError) -> void:
+	print("Rewarded Ad falhou:", ad_error.message)
+
+func on_rewarded_loaded(new_rewarded_ad : RewardedAd) -> void:
+	print("Rewarded Ad carregado")
+	rewarded_ad = new_rewarded_ad
+	# Não mostro aqui direto, apenas guardo.
+	#show_rewarded_ad()
+
+func show_rewarded_ad():
+	if rewarded_ad:
+		rewarded_ad.show(rewarded_ad_callback)
+	else:
+		print("Rewarded não carregado ainda!")
+		
+func on_user_earned_reward(reward) -> void:
+	print("Jogador ganhou recompensa: %d %s" % [reward.amount, reward.type])

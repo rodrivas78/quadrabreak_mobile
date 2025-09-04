@@ -8,6 +8,10 @@ var selector_activated = true
 var counter = 0
 
 @onready var current_scene_name = get_tree().current_scene.name
+
+#var is_initialized: bool = false
+#@onready var admob = get_node("/root/"+current_scene_name+"/Admob")
+
 @onready var selector1 = get_node("/root/"+current_scene_name+"/selector")
 @onready var selector2 = get_node("/root/"+current_scene_name+"/selector2")
 @onready var selector3 = get_node("/root/"+current_scene_name+"/selector3")
@@ -23,6 +27,8 @@ var counter = 0
 @onready var selected : AudioStreamPlayer = $SomChoosed
 
 func _ready():
+	#admob
+	#admob.initialize()
 	selector1.input_event.connect(_on_selector1_input_event)
 	selector2.input_event.connect(_on_selector2_input_event)
 	selector3.input_event.connect(_on_selector3_input_event)
@@ -57,6 +63,12 @@ func _on_selector2_input_event(viewport: Viewport, event: InputEvent, shape_idx:
 		selector2.visible = false
 		selector3.visible = false
 		selector4.visible = false
+		#admob
+		#if is_initialized:
+			#print_debug("on_start_is_initalized")
+			#admob.load_banner_ad()
+			#await admob.rewarded_ad_loaded
+			#admob.show_banner_ad()
 
 
 # Selector 3 - Tela sobre
@@ -69,6 +81,12 @@ func _on_selector3_input_event(viewport: Viewport, event: InputEvent, shape_idx:
 		selector2.visible = false
 		selector3.visible = false
 		selector4.visible = false
+		#admob
+		#if is_initialized:
+			#print_debug("confirm_selec_is_initialized")
+			#admob.load_rewarded_ad()
+			#await admob.rewarded_ad_loaded
+			#admob.show_rewarded_ad()
   
 
 # Selector 4 - Sair do jogo
@@ -99,3 +117,8 @@ func set_music_fade_out() -> void:
 		if titleMusic.volume_db <= -80:
 		# Para a reprodução da música
 			titleMusic.stop()
+
+#
+#func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
+	#print_debug("on_admob_initialization")
+	#is_initialized = true
