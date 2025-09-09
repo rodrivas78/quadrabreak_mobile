@@ -210,18 +210,6 @@ position = Vector2(392.545, 315.5)
 scale = Vector2(0.712952, 0.7)
 texture = ExtResource("27_q5mlg")
 
-[node name="YesSelector_" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(270.941, 377)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("29_rjynn")
-
-[node name="NoSelector_" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(526.941, 376)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("30_rf4jk")
-
 [node name="Level" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(326.941, 305)
