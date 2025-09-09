@@ -206,7 +206,7 @@ texture = ExtResource("27_yw5mg")
 
 [node name="ContinueYN" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(388.545, 330.5)
+position = Vector2(392.545, 315.5)
 scale = Vector2(0.712952, 0.7)
 texture = ExtResource("27_q5mlg")
 
@@ -346,6 +346,7 @@ scale = Vector2(1.05, 1.05)
 
 [node name="YesSelector" type="Area2D" parent="."]
 visible = false
+position = Vector2(3, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YesSelector"]
 position = Vector2(270, 377)
@@ -358,6 +359,7 @@ texture = ExtResource("29_rjynn")
 
 [node name="NoSelector" type="Area2D" parent="."]
 visible = false
+position = Vector2(4, -15)
 
 [node name="NoSelector_" type="Sprite2D" parent="NoSelector"]
 position = Vector2(526.941, 376)
