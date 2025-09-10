@@ -26,21 +26,21 @@
 [ext_resource type="Texture2D" uid="uid://ug5ick6j4aju" path="res://assets/sprites/_50.png" id="23_rn7lg"]
 [ext_resource type="Texture2D" uid="uid://c328yss8joxum" path="res://assets/sprites/no_bonus.png" id="24_xtefc"]
 [ext_resource type="Texture2D" uid="uid://ci8qc8ab88nn5" path="res://assets/sprites/overlay1.png" id="26_k3oqe"]
-[ext_resource type="Texture2D" uid="uid://bjpn2j2bvwvep" path="res://assets/sprites/continue.png" id="27_aogaq"]
 [ext_resource type="Texture2D" uid="uid://cb1fy6sda6pwm" path="res://assets/sprites/yes_selector.png" id="28_5hpeb"]
 [ext_resource type="Texture2D" uid="uid://b38nof4i4ur2q" path="res://assets/sprites/no_selector.png" id="29_e58o0"]
 [ext_resource type="Script" path="res://scenes/stage/stage_label.gd" id="30_313at"]
 [ext_resource type="Texture2D" uid="uid://dkcutdlj3ve6y" path="res://assets/sprites/borda6.png" id="31_h3tfu"]
 [ext_resource type="PackedScene" uid="uid://cy7qky7givvym" path="res://scenes/borda/Borda.tscn" id="32_12bq4"]
 [ext_resource type="Script" path="res://scenes/level_label/level_label.gd" id="33_icsn2"]
+[ext_resource type="Texture2D" uid="uid://d58gwxv6g0y6" path="res://assets/sprites/continue_watch_ad.png" id="33_ijkb7"]
 [ext_resource type="Texture2D" uid="uid://dx3kngsabp35b" path="res://assets/sprites/start_button_sm2.png" id="34_ihu8q"]
 [ext_resource type="Script" path="res://scenes/fases/fase_02/start_button_sm_2.gd" id="35_px5uw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlrg5"]
-size = Vector2(245, 66)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_st252"]
 radius = 85.0059
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrwe0"]
+size = Vector2(245, 66)
 
 [node name="Fase01" type="Node2D"]
 
@@ -210,24 +210,6 @@ position = Vector2(399.941, 301)
 scale = Vector2(0.994, 0.99)
 texture = ExtResource("26_k3oqe")
 
-[node name="ContinueYN" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(399.941, 301)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("27_aogaq")
-
-[node name="YesSelector_" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(270.941, 377)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("28_5hpeb")
-
-[node name="NoSelector_" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(526.941, 376)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("29_e58o0")
-
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 script = ExtResource("30_313at")
 
@@ -340,30 +322,6 @@ bbcode_enabled = true
 text = "LEVEL"
 metadata/_edit_use_anchors_ = true
 
-[node name="YesSelector" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YesSelector"]
-position = Vector2(270, 377)
-shape = SubResource("RectangleShape2D_dlrg5")
-
-[node name="YesSelector_" type="Sprite2D" parent="YesSelector"]
-position = Vector2(270.941, 377)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("28_5hpeb")
-
-[node name="NoSelector" type="Area2D" parent="."]
-visible = false
-
-[node name="NoSelector_" type="Sprite2D" parent="NoSelector"]
-position = Vector2(526.941, 376)
-scale = Vector2(0.7, 0.697)
-texture = ExtResource("29_e58o0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NoSelector"]
-position = Vector2(527.5, 377)
-shape = SubResource("RectangleShape2D_dlrg5")
-
 [node name="StartButton" type="Area2D" parent="."]
 visible = false
 
@@ -376,3 +334,35 @@ position = Vector2(925, 455)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("34_ihu8q")
 script = ExtResource("35_px5uw")
+
+[node name="ContinueYN" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(392.545, 301.5)
+scale = Vector2(0.712952, 0.7)
+texture = ExtResource("33_ijkb7")
+
+[node name="YesSelector" type="Area2D" parent="."]
+visible = false
+position = Vector2(3, -29)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YesSelector"]
+position = Vector2(270, 377)
+shape = SubResource("RectangleShape2D_mrwe0")
+
+[node name="YesSelector_" type="Sprite2D" parent="YesSelector"]
+position = Vector2(270.941, 377)
+scale = Vector2(0.7, 0.697)
+texture = ExtResource("28_5hpeb")
+
+[node name="NoSelector" type="Area2D" parent="."]
+visible = false
+position = Vector2(4, -29)
+
+[node name="NoSelector_" type="Sprite2D" parent="NoSelector"]
+position = Vector2(526.941, 376)
+scale = Vector2(0.7, 0.697)
+texture = ExtResource("29_e58o0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoSelector"]
+position = Vector2(527.5, 377)
+shape = SubResource("RectangleShape2D_mrwe0")
